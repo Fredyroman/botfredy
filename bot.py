@@ -18,6 +18,57 @@ def on_command_start(message):
         parse_mode="Markdown")
 
 
+########  SUMAR  #############
+@bot.message_handler(regexp=r"^sumar ([+-]?([0-9]*[.])?[0-9]+) y ([+-]?([0-9]*[.])?[0-9]+)$")
+def on_add(message):
+    bot.send_chat_action(message.chat.id, 'typing')
+    sleep(1)
+
+    parts = re.match(
+        r"^sumar ([+-]?([0-9]*[.])?[0-9]+) y ([+-]?([0-9]*[.])?[0-9]+)$",
+        message.text,
+        flags=re.IGNORECASE)
+
+    print (parts.groups())
+
+    oper1 = float(parts[1])
+    oper2 = float(parts[3])
+
+    result = oper1 + oper2
+
+    bot.reply_to(
+        message,
+        f"\U0001F522 Resultado: {result}")
+
+
+######## DIVIDIR #############
+@bot.message_handler(regexp=r"^dividir ([+-]?([0-9]*[.])?[0-9]+) y ([+-]?([0-9]*[.])?[0-9]+)$")
+def on_add(message):
+    bot.send_chat_action(message.chat.id, 'typing')
+    sleep(1)
+
+    parts = re.match(
+        r"^dividir ([+-]?([0-9]*[.])?[0-9]+) y ([+-]?([0-9]*[.])?[0-9]+)$",
+        message.text,
+        flags=re.IGNORECASE)
+
+    print (parts.groups())
+
+    oper1 = float(parts[1])
+    oper2 = float(parts[3])
+
+    result = ""
+
+    if  oper2 == 0 :
+        result = "\U0001F47B No se puede dividir por cero "
+    else:
+        result = oper1 / oper2
+
+    bot.reply_to(
+        message,
+        f"\U0001F522 Resultado: {result}")
+
+
 
 #####################
 # Se ejucuta cuando no entiende o no puede interpretar lo que escribio el usuario
